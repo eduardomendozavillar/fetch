@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    div{
+        border: 1px solid black;
+    }
+    
+    </style>
+</head>
+<body>
+    
+    <button id="btcargar">Cargar Paises</button>
+    <div id="Paises">
+
+    </div>
+    <script>
+        var btcargar=document.getElementById("btcargar");
+        var divPaises=document.getElementById("Paises");
+        var contatena="";
+        btcargar.addEventListener("click", cargarDatos);
+        function cargarDatos(){
+            fetch("https://restcountries.eu/rest/v2/all")
+        .then(function(response){
+            return response.json();
+        }).then(function(data){
+            console.log(data);
+            for(i=0; i<data.length;i++){
+               contatena += "<p> Pais:"+data[i].name +"</p>"
+               contatena +="<img src='"+data[i].flag+"' width='100px' height='100px'/>";
+            }
+            divPaises.innerHTML = contatena;
+        }).catch(function(error){
+            console.log(error);
+        })
+        
+        }
+     
+        
+    </script>
+</body>
+</html>
